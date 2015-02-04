@@ -1,0 +1,3 @@
+setenv_local.sh
+node_modules
+.DS_Store
