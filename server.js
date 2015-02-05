@@ -16,23 +16,17 @@ var app = express();
 
 var tweets = {};
 
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
 
 function search(term, done) {
   T.get('search/tweets', { q: term, count: 100 }, function(err, data, response) {
     done(data);
   });
 }
-
-// TODO
-// Whitelist terms
-// function valid(term) {
-//   tweets[term];
-// }
-//
-// if(!_.has(ALLOWED_TERMS, term)) {
-//   return 500;
-// }
-
 
 app.get('/search', function (req, res) {
   var term = req.query.term;
@@ -82,3 +76,13 @@ var server = app.listen(port, function () {
   var port = server.address().port;
   console.log('Example app listening at http://%s:%s', host, port);
 });
+
+// TODO
+// Whitelist terms
+// function valid(term) {
+//   tweets[term];
+// }
+//
+// if(!_.has(ALLOWED_TERMS, term)) {
+//   return 500;
+// }
