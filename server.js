@@ -59,10 +59,12 @@ app.get('/search', function (req, res) {
 
     var tweet = data.statuses[0];
 
+    // console.log("Got tweet", tweet);
 
     tweets[term] = {
       created: Date.now(),
       data: {
+        id: tweet.id_str,
         text: tweet.text,
         date: tweet.created_at,
         name: tweet.user.name,
