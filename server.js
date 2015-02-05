@@ -16,11 +16,11 @@ var app = express();
 
 var tweets = {};
 
-app.all('/', function(req, res, next) {
+app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
- });
+});
 
 function search(term, done) {
   T.get('search/tweets', { q: term, count: 100 }, function(err, data, response) {
